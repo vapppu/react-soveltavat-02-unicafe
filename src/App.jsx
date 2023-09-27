@@ -1,26 +1,32 @@
 import { useState } from "react";
 
-const Button = (props) => {
-  return <button onClick={props.handleChange}>{props.text}</button>;
+const Button = ({ handleChange, text }) => {
+  return <button onClick={handleChange}>{text}</button>;
+};
+
+const StatisticLine = ({ text, value }) => {
+  return (
+    <li>
+      {text}: {value}
+    </li>
+  );
 };
 
 const Statistics = ({ good, neutral, bad }) => {
-
   const total = good + neutral + bad;
   const average = total != 0 ? (good - bad) / total : 0;
   const positive = total != 0 ? (good / total) * 100 : 0;
 
-  if (total <= 0)
-    return <p>No feedback given</p>
+  if (total <= 0) return <p>No feedback given</p>;
 
   return (
     <ol style={{ listStyle: "none" }}>
-      <li>good {good}</li>
-      <li>neutral {neutral}</li>
-      <li>good {bad}</li>
-      <li>all {good + neutral + bad}</li>
-      <li>average: {average}</li>
-      <li>positive: {positive} %</li>
+      <StatisticLine text="good" value={good} />
+      <StatisticLine text="neutral" value={neutral} />
+      <StatisticLine text="bad" value={bad} />
+      <StatisticLine text="all" value={good + neutral + bad} />
+      <StatisticLine text="average" value={average} />
+      <StatisticLine text="positive" value={positive.toString() + " %"} />
     </ol>
   );
 };
