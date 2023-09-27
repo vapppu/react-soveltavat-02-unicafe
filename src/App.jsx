@@ -10,6 +10,9 @@ const Statistics = ({ good, neutral, bad }) => {
   const average = total != 0 ? (good - bad) / total : 0;
   const positive = total != 0 ? (good / total) * 100 : 0;
 
+  if (total <= 0)
+    return <p>No feedback given</p>
+
   return (
     <ol style={{ listStyle: "none" }}>
       <li>good {good}</li>
